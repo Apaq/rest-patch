@@ -10,7 +10,7 @@
     
     <groupId>dk.apaq</groupId>
     <artifactId>rest-patch</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -62,7 +62,9 @@
     </build>
 
 
-  <scm>
-    <tag>rest-patch-1.0.1</tag>
-  </scm>
+    <scm>
+        <connection>scm:git:https://github.com/michaelkrog/rest-patch.git</connection>
+        <developerConnection>scm:git:git@github.com:michaelkrog/rest-patch.git</developerConnection>
+        <url>https://github.com/michaelkrog/rest-patch</url>
+    </scm>
 </project>
