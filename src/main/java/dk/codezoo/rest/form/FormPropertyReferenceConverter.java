@@ -23,8 +23,8 @@ public class FormPropertyReferenceConverter implements PropertyReferenceConverte
      * __Example__
      * meta[color] -> meta(color)
      *
-     * @param input
-     * @return
+     * @param input Map of properties
+     * @return Returns list of fields
      */
     @Override
     public Collection<String> translate(Map<String, String[]> input) {
