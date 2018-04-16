@@ -21,7 +21,7 @@ public class FormPropertyReferenceConverter implements PropertyReferenceConverte
      * square brackets replaced with parantheses.
      *
      * __Example__
-     * meta[color] -> meta(color)
+     * meta[color] becomes meta(color)
      *
      * @param input Map of properties
      * @return Returns list of fields
