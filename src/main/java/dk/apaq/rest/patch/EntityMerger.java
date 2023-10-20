@@ -1,4 +1,4 @@
-package dk.apaq.rest;
+package dk.apaq.rest.patch;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.Validate;

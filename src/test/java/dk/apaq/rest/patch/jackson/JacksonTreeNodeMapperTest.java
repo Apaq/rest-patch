@@ -1,6 +1,6 @@
-package dk.apaq.rest.jackson;
+package dk.apaq.rest.patch.jackson;
 
-import dk.apaq.rest.DummyEntity;
+import dk.apaq.rest.patch.DummyEntity;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

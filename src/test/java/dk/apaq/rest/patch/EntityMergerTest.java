@@ -1,4 +1,4 @@
-package dk.apaq.rest;
+package dk.apaq.rest.patch;
 
 import static org.junit.Assert.*;
 import org.junit.Test;

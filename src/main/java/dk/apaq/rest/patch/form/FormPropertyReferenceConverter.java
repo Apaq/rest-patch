@@ -1,6 +1,6 @@
-package dk.apaq.rest.form;
+package dk.apaq.rest.patch.form;
 
-import dk.apaq.rest.PropertyReferenceConverter;
+import dk.apaq.rest.patch.PropertyReferenceConverter;
 
 import java.util.ArrayList;
 import java.util.Collection;
