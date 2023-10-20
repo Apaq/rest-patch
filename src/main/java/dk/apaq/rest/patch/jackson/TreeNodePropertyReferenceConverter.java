@@ -1,7 +1,7 @@
-package dk.apaq.rest.jackson;
+package dk.apaq.rest.patch.jackson;
 
 import com.fasterxml.jackson.core.TreeNode;
-import dk.apaq.rest.PropertyReferenceConverter;
+import dk.apaq.rest.patch.PropertyReferenceConverter;
 
 import java.util.ArrayList;
 import java.util.Collection;

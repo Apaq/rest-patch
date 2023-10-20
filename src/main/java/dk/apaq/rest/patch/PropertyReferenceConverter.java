@@ -1,4 +1,4 @@
-package dk.apaq.rest;
+package dk.apaq.rest.patch;
 
 import java.util.Collection;
 
