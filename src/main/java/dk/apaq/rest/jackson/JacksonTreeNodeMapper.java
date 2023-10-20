@@ -14,7 +14,7 @@ public class JacksonTreeNodeMapper extends ObjectMapper {
 
     @Override
     protected Object _readMapAndClose(JsonParser jp, JavaType valueType) throws IOException {
-        TreeNode node = jp.readValueAsTree();
+        var node = jp.readValueAsTree();
         TreeNodeHolder.set(node);
         return super._readMapAndClose(node.traverse(), valueType);
     }

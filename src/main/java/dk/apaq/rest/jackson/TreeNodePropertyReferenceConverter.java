@@ -14,9 +14,9 @@ public class TreeNodePropertyReferenceConverter implements PropertyReferenceConv
 
     @Override
     public Collection<String> translate(TreeNode input) {
-        List<String> refs = new ArrayList<>();
+        var refs = new ArrayList<String>();
         if(input.isObject()) {
-            traverseObject(input, refs, new ArrayList());
+            traverseObject(input, refs, new ArrayList<>());
         }
         return refs;
     }
@@ -58,7 +58,7 @@ public class TreeNodePropertyReferenceConverter implements PropertyReferenceConv
     }
 
     private void traverseValue(List<String> path, List<String> fields) {
-        String strPath = String.join("", path);
+        var strPath = String.join("", path);
         if(strPath.startsWith(".")) {
             strPath = strPath.substring(1);
         }
