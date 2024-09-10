@@ -1,6 +1,6 @@
 # rest-patch
 
-This library aims to aid in supporting patching for requests in Java-based RESTFUL webservices. It is not tied into Spring in anyway, but all examples here are shown using Spring Boot. It aims to support the logical way of handling REST in services like [Stripe](https://stripe.com) and [Previsto](https://previsto.com) and hence support JSON and FORM based requests.
+This library aims to aid in supporting patching for requests in Java-based RESTFUL webservices. It is not tied into Spring in anyway, but all examples here are shown using Spring Boot. It aims to support the logical way of handling REST patching in services like [Stripe](https://stripe.com) and [Previsto](https://previsto.com) and hence support JSON and FORM based requests.
 
 ## What does it do?
 
