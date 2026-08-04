@@ -13,7 +13,7 @@ public void main() {
   EntityMerger merger = new EntityMerger();
   Pet patch = new Pet();
   patch.setName("Bella");
-  path.setKind(Kind.Cat);
+  patch.setKind(Kind.Cat);
   
   Pet original = new Pet();
   original.setName("Barkley");
@@ -36,7 +36,7 @@ __JSON Example (Spring Boot)__
 public class PetController {
 
   private TreeNodePropertyReferenceConverter fieldConverter = new TreeNodePropertyReferenceConverter();
-  private EntityMerger<et> merger = new EntityMerger();
+  private EntityMerger<Pet> merger = new EntityMerger();
     
   @PutMapping("/pets/{id}")
   public Pet update(@RequestBody Pet patch, @PathVariable String id) {
@@ -49,6 +49,42 @@ public class PetController {
 ```
 The above example allows us to send just the fields we want to update, fx. `{"name": "Bessie"}`, without overwriting other fields.
 
+> __Note on thread safety:__ `TreeNodeHolder` is a single slot per thread and is cleared at the start of
+> every capture, so a failed request never leaves stale data behind. Always consume the captured node
+> immediately and release it in a `finally` block:
+> ```Java
+> try {
+>   Pet original = ...;
+>   List<String> fields = fieldConverter.translate(TreeNodeHolder.get());
+>   ...
+> } finally {
+>   TreeNodeHolder.clear();
+> }
+> ```
+
+#### Getting dirty fields without thread-local state (recommended)
+
+If you control the `ObjectMapper`, use a `JacksonTreeNodeMapper` and the `Patched` API instead. The raw
+tree node is returned together with the deserialized value, so no thread-local state is involved at all:
+
+```Java
+@RestController
+public class PetController {
+
+  private JacksonTreeNodeMapper mapper = new JacksonTreeNodeMapper();
+  private EntityMerger<Pet> merger = new EntityMerger();
+
+  @PutMapping("/pets/{id}")
+  public Pet update(@RequestBody String payload, @PathVariable String id) throws IOException {
+    Pet original = ...;  // Get original from backend
+    Patched<Pet> patched = mapper.readPatchedValue(payload, Pet.class);
+    List<String> fields = patched.dirtyFields();
+    Pet merge = this.merger.mergeEntities(original, patched.value(), fields);
+    ... // Save merge to backend
+  }
+}
+```
+
 It gives you the same flexibility with FORM input which is handy when it comes to supporting access to the API via cUrl.
 
 __FORM Example (Spring Boot)__
@@ -57,12 +93,12 @@ __FORM Example (Spring Boot)__
 public class PetController {
 
   private FormPropertyReferenceConverter fieldConverter = new FormPropertyReferenceConverter();
-  private EntityMerger<et> merger = new EntityMerger();
+  private EntityMerger<Pet> merger = new EntityMerger();
     
   @PutMapping("/pets/{id}", consumes = "application/x-www-form-urlencoded")
   public Pet update(@ModelAttribute Pet patch, @PathVariable String id, HttpServletRequest request) {
     Pet original = ...;  // Get original from backend
-    List<String> fields = fieldConverter.translate(request.getParameterMap()));
+    List<String> fields = fieldConverter.translate(request.getParameterMap());
     Pet merge = this.merger.mergeEntities(original, patch, fields);
     ... // Save merge to backend
   } 
