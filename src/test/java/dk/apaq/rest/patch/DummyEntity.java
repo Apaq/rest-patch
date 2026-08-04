@@ -1,13 +1,16 @@
 package dk.apaq.rest.patch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DummyEntity {
     private String text;
     private int number;
     private String[] array;
     private List<String> list = new ArrayList<>();
+    private Map<String, String> meta = new HashMap<>();
     private DummyEntity child;
 
     public DummyEntity() { }
@@ -49,6 +52,14 @@ public class DummyEntity {
 
     public void setList(List<String> list) {
         this.list = list;
+    }
+
+    public Map<String, String> getMeta() {
+        return meta;
+    }
+
+    public void setMeta(Map<String, String> meta) {
+        this.meta = meta;
     }
 
     public DummyEntity getChild() {

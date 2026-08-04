@@ -54,6 +54,9 @@ public class TreeNodeExtractorDeserializer extends DelegatingDeserializer {
 
         // Check if we are at the root level of the JSON structure
         if (depth == 1 && !(p instanceof TreeTraversingParser)) {
+            // Drop any previously captured node so a failed parse never leaves stale data behind.
+            TreeNodeHolder.clear();
+
             // Extract the root JSON tree node
             TreeNode treeNode = p.readValueAsTree();
             TreeNodeHolder.set(treeNode);  // Store the extracted node in TreeNodeHolder
